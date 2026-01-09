@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ajax 란 ?</h1>
+    
+<script>
+    // <script> -> 자바 스크립트 사용 명령어 
+    console.log("hello javascript world"); // 콘솔(인터넷 개발자코드)에서만 보임
+    // Ajax를 가능하게 하는 객체 생성
+    
+    var BASE_URL = "http://127.0.0.1:8000";
+
+    // var은 변수 선언 
+    // new가 없으면 xhr은 XMLHttpRequest()로써 작동하지 못한다.
+    var xhr = new XMLHttpRequest() ;
+    console.dir(xhr); 
+    // -> XMLHttpRequest()는 Ajax를 사용하게 해주는 기술
+    // 콘솔상 on으로 시작하는건 이벤트 핸들러 
+
+    // 후속으로 결과를 처리하는 함수
+    xhr.onload = function(event) {
+        // cosole.log(event)l
+        console.log(xhr.responseText) ;
+    }
+    // 요청 할 타켓을 지정
+    // xhr.open("GET", BASE_URL+"/",true) //메서드, url, 동기여부 순서
+    // 실행하라는 신호
+    // xhr.send()
+
+    xhr.open("POST", BASE_URL+"/login",true)
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("username=kim")
+    // 메서드가 POST 이며, Form 사용할 경우 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 가 있어야 한다.
+    // 중요: to POST Data like an HTML From
+
+    dataObj = {
+        text : "Hello FastAPI Server"
+    }
+
+    xhr.open("POST", BASE_URL+"/",true)
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(JSON.stringify(dataObj))
+    // 자바 스크립트 객체를 JSON 문자열로 변환 후 전송
+
+</script>
+</body>
+</html>
